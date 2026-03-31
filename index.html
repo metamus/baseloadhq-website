@@ -8,6 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Microsoft Clarity Analytics -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w4fm46ajwb");
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -809,16 +813,20 @@
         </div>
 
         <!-- Employer Form -->
-        <form class="form-panel active" id="form-employer" onsubmit="event.preventDefault(); this.querySelector('.submit-btn').textContent='Request Sent ✓'; this.querySelector('.submit-btn').style.background='var(--green)';">
+        <form class="form-panel active" id="form-employer" action="https://formsubmit.co/info@baseloadhq.com" method="POST">
+          <input type="hidden" name="_subject" value="New Staffing Request — Baseload HQ">
+          <input type="hidden" name="_next" value="https://baseloadhq.com?submitted=employer#contact">
+          <input type="hidden" name="_captcha" value="true">
+          <input type="hidden" name="_template" value="table">
           <div class="form-row">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Work Email" required>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Work Email" required>
           </div>
           <div class="form-row">
-            <input type="tel" placeholder="Phone Number">
-            <input type="text" placeholder="Company Name" required>
+            <input type="tel" name="phone" placeholder="Phone Number">
+            <input type="text" name="company" placeholder="Company Name" required>
           </div>
-          <select>
+          <select name="staffing_need">
             <option value="" disabled selected>Type of staffing need...</option>
             <option>Construction — Electrical</option>
             <option>Construction — Mechanical / HVAC</option>
@@ -828,21 +836,25 @@
             <option>Multiple Roles / Full Crew</option>
             <option>Other</option>
           </select>
-          <textarea placeholder="Tell us about the project — roles needed, timeline, location, and any specific requirements..."></textarea>
+          <textarea name="message" placeholder="Tell us about the project — roles needed, timeline, location, and any specific requirements..."></textarea>
           <button type="submit" class="submit-btn">Submit Staffing Request &rarr;</button>
         </form>
 
         <!-- Worker Form -->
-        <form class="form-panel" id="form-worker" onsubmit="event.preventDefault(); this.querySelector('.submit-btn').textContent='Application Sent ✓'; this.querySelector('.submit-btn').style.background='var(--green)';">
+        <form class="form-panel" id="form-worker" action="https://formsubmit.co/careers@baseloadhq.com" method="POST">
+          <input type="hidden" name="_subject" value="New Worker Application — Baseload HQ">
+          <input type="hidden" name="_next" value="https://baseloadhq.com?submitted=worker#contact">
+          <input type="hidden" name="_captcha" value="true">
+          <input type="hidden" name="_template" value="table">
           <div class="form-row">
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email Address" required>
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
           </div>
           <div class="form-row">
-            <input type="tel" placeholder="Phone Number" required>
-            <input type="text" placeholder="City, State">
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+            <input type="text" name="location" placeholder="City, State">
           </div>
-          <select>
+          <select name="primary_trade">
             <option value="" disabled selected>Primary trade...</option>
             <option>Electrician (Journeyman / Master)</option>
             <option>HVAC / Mechanical Technician</option>
@@ -854,7 +866,7 @@
             <option>General Construction Laborer</option>
             <option>Other</option>
           </select>
-          <textarea placeholder="Tell us about your experience — years in trade, certifications held, data center experience, availability..."></textarea>
+          <textarea name="message" placeholder="Tell us about your experience — years in trade, certifications held, data center experience, availability..."></textarea>
           <button type="submit" class="submit-btn">Submit Application &rarr;</button>
         </form>
       </div>

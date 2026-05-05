@@ -386,6 +386,18 @@
     outline: none; border-color: var(--cyan); box-shadow: 0 0 12px rgba(6,182,212,0.15);
   }
   .contact-form textarea { min-height: 100px; resize: vertical; }
+  .file-upload { position: relative; }
+  .file-input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .file-label {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px; border: 2px dashed rgba(6,182,212,0.3); border-radius: 10px;
+    color: var(--gray-400); font-size: 14px; font-weight: 500; cursor: pointer;
+    transition: all 0.3s; font-family: 'Space Grotesk', sans-serif;
+  }
+  .file-label:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(6,182,212,0.04); }
+  .file-label.has-file { border-color: rgba(6,182,212,0.5); color: var(--cyan); background: rgba(6,182,212,0.06); }
+  .file-icon { font-size: 18px; }
+  .file-name { display: block; text-align: center; color: var(--cyan); font-size: 13px; margin-top: 6px; font-family: 'Space Grotesk', sans-serif; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .submit-btn {
     background: linear-gradient(135deg, var(--cyan), var(--electric)); color: var(--white-full);
@@ -841,7 +853,7 @@
         </form>
 
         <!-- Worker Form -->
-        <form class="form-panel" id="form-worker" action="https://formsubmit.co/careers@baseloadhq.com" method="POST">
+        <form class="form-panel" id="form-worker" action="https://formsubmit.co/careers@baseloadhq.com" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="_subject" value="New Worker Application — Baseload HQ">
           <input type="hidden" name="_next" value="https://baseloadhq.com?submitted=worker#contact">
           <input type="hidden" name="_captcha" value="true">
@@ -867,6 +879,13 @@
             <option>Other</option>
           </select>
           <textarea name="message" placeholder="Tell us about your experience — years in trade, certifications held, data center experience, availability..."></textarea>
+          <div class="file-upload">
+            <label for="resume-upload" class="file-label">
+              <span class="file-icon">&#128206;</span> Upload Resume (PDF, DOC, DOCX)
+            </label>
+            <input type="file" id="resume-upload" name="attachment" accept=".pdf,.doc,.docx" class="file-input">
+            <span class="file-name" id="file-name-display"></span>
+          </div>
           <button type="submit" class="submit-btn">Submit Application &rarr;</button>
         </form>
       </div>
@@ -933,6 +952,19 @@ function switchForm(tab) {
     document.getElementById('form-worker').classList.add('active');
   }
 }
+
+// Resume file upload display
+document.getElementById('resume-upload').addEventListener('change', function() {
+  const label = document.querySelector('.file-label');
+  const display = document.getElementById('file-name-display');
+  if (this.files.length > 0) {
+    display.textContent = this.files[0].name;
+    label.classList.add('has-file');
+  } else {
+    display.textContent = '';
+    label.classList.remove('has-file');
+  }
+});
 </script>
 
 </body>
